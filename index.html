@@ -83,7 +83,7 @@
     }
 
     function decreaseTime() {
-    	if (timeLeft < 0) {
+    	if (timeLeft < 1000) {
             window.clearInterval(interval);
     	    return false;
     	}
@@ -118,6 +118,8 @@
 
     window.document.addEventListener('keypress', playPause);
     window.document.addEventListener('click', playPause);
+    window.document.addEventListener('touchstart', playPause);
+
 //    window.document.addEventListener('', playPause);
   </script>
 </head>
