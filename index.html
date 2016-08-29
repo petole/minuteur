@@ -83,6 +83,10 @@
     }
 
     function decreaseTime() {
+    	if (timeLeft < 0) {
+            window.clearInterval(interval);
+    	    return false;
+    	}
         timeLeft -= 1000;
         if (timeLeft < 30*1000) {
             document.body.classList = "yellow";
@@ -93,8 +97,8 @@
         }
 
         let timeRemaining = getTimeRemaining(timeLeft);
-        console.log(timeRemaining.minutes + ":" + timeRemaining.seconds);
         window.document.querySelector('#timer').innerHTML = timeRemaining.minutes + ":" + ('0' + timeRemaining.seconds).slice(-2) ;
+        return true;
     }
 
     function playPause () {
