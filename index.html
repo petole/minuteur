@@ -78,8 +78,8 @@
         window.document.querySelector('#timer').innerHTML = minutes + ":00";
     };
 
-    function getQueryParameters (str) {
-	      return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    function getQueryParameters () {
+	      return document.location.search.replace(/(^\?)/,'').split("&").concat(document.location.hash.replace(/(^\#)/,'').split("#")).map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
     }
 
     function decreaseTime() {
