@@ -1,0 +1,130 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>3 minutes</title>
+  <meta name="author" content="Steven Bougon">
+
+  <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 1000ms linear;
+    }
+    #timer {
+      width: 95%;
+      height: 80%;
+      overflow: auto;
+      margin: auto;
+      position: absolute;
+      top: 0; left: 0; bottom: 0; right: 0;
+      text-align: center;
+    }
+
+    body.green {
+        background-color: #00C853;
+    }
+
+    body.yellow {
+        background-color: #FFFF00;
+    }
+
+    body.red {
+        background-color: #FF3D00;
+    }
+
+
+    @media all and (min-width: 100px)  {  #timer  { font-size: 60px; line-height: 60px; height: 60px;  } }
+    @media all and (min-width: 200px)  {  #timer  { font-size: 100px; line-height: 100px; height: 100px;  } }
+    @media all and (min-width: 300px)  {  #timer  { font-size: 140px; line-height: 140px; height: 140px;  } }
+    @media all and (min-width: 400px)  {  #timer  { font-size: 180px; line-height: 180px; height: 180px;  } }
+    @media all and (min-width: 500px)  {  #timer  { font-size: 230px; line-height: 230px; height: 230px;  } }
+    @media all and (min-width: 600px)  {  #timer  { font-size: 280px; line-height: 280px; height: 280px;  } }
+    @media all and (min-width: 700px)  {  #timer  { font-size: 320px; line-height: 320px; height: 320px;  } }
+    @media all and (min-width: 800px)  {  #timer  { font-size: 360px; line-height: 360px; height: 360px;  } }
+    @media all and (min-width: 900px)  {  #timer  { font-size: 400px; line-height: 400px; height: 400px;  } }
+    @media all and (min-width: 1000px)  {  #timer  { font-size: 440px; line-height: 440px; height: 440px;  } }
+    @media all and (min-width: 1100px)  {  #timer  { font-size: 480px; line-height: 480px; height: 480px;  } }
+    @media all and (min-width: 1200px)  {  #timer  { font-size: 520px; line-height: 520px; height: 520px;  } }
+    @media all and (min-width: 1300px)  {  #timer  { font-size: 560px; line-height: 560px; height: 560px;  } }
+    @media all and (min-width: 1400px)  {  #timer  { font-size: 600px; line-height: 600px; height: 600px;  } }
+    @media all and (min-width: 1500px)  {  #timer  { font-size: 640px; line-height: 640px; height: 640px;  } }
+    @media all and (min-width: 1600px)  {  #timer  { font-size: 680px; line-height: 680px; height: 680px;  } }
+  </style>
+
+  <script>
+    let timerOn = false;
+    let interval = null;
+    const minutes = getQueryParameters().m || 3;
+    let timeLeft = minutes*60*1000;
+    let endTime = undefined;
+    function getTimeRemaining(t){
+        var seconds = Math.floor( (t/1000) % 60 );
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        var hours = Math.floor( (t/(1000*60*60)) % 24 );
+        var days = Math.floor( t/(1000*60*60*24) );
+        return {
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
+        };
+    };
+
+    window.onload= function () {
+        window.document.querySelector('#timer').innerHTML = minutes + ":00";
+    };
+
+    function getQueryParameters (str) {
+	      return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+    }
+
+    function decreaseTime() {
+        timeLeft -= 1000;
+        if (timeLeft < 30*1000) {
+            document.body.classList = "yellow";
+
+        }
+        if (timeLeft < 15*1000) {
+            document.body.classList = "red";
+        }
+
+        let timeRemaining = getTimeRemaining(timeLeft);
+        console.log(timeRemaining.minutes + ":" + timeRemaining.seconds);
+        window.document.querySelector('#timer').innerHTML = timeRemaining.minutes + ":" + ('0' + timeRemaining.seconds).slice(-2) ;
+    }
+
+    function playPause () {
+        window.document.querySelector('#timer').style.color = "white";
+        window.setTimeout(function () {
+            window.document.querySelector('#timer').style.color = "black";
+        }, 150);
+        timerOn = !timerOn;
+        if (timerOn) {
+            endTime = Date.now() + timeLeft;
+            interval = window.setInterval(decreaseTime, 1000);
+        }
+        else {
+            window.clearInterval(interval);
+        }
+    };
+
+    window.document.addEventListener('keypress', playPause);
+    window.document.addEventListener('click', playPause);
+//    window.document.addEventListener('', playPause);
+  </script>
+</head>
+
+<body class="green">
+  <script src="index.js"></script>
+  <div id="#container">
+    <div id="timer" class="green">3:00</div>
+
+  </div>
+
+</body>
+</html>
