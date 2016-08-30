@@ -80,6 +80,7 @@
         window.document.querySelector('#timer').innerHTML = minutes + ":00";
         window.document.addEventListener('keypress', playPause);
         window.document.addEventListener('click', playPause);
+        window.document.getElementById(timer).addEventListener('click', playPause);
 //window.document.addEventListener('touchstart', playPause);
     };
 
