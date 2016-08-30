@@ -57,7 +57,7 @@
   <script>
     var timerOn = false;
     var interval = null;
-    var minutes = getQueryParameters().m || 3;
+    var minutes = 0;
     var timeLeft = minutes*60*1000;
     var endTime = undefined;
     function getTimeRemaining(t){
@@ -75,6 +75,7 @@
     };
 
     window.onload= function () {
+    	minutes = getQueryParameters().m || 3;
         window.document.querySelector('#timer').innerHTML = minutes + ":00";
         window.document.addEventListener('keypress', playPause);
         window.document.addEventListener('click', playPause);
@@ -105,7 +106,6 @@
     }
 
     function playPause () {
-    	alert("playPause");
         window.document.querySelector('#timer').style.color = "white";
         window.setTimeout(function () {
             window.document.querySelector('#timer').style.color = "black";
