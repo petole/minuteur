@@ -55,11 +55,11 @@
   </style>
 
   <script>
-    let timerOn = false;
-    let interval = null;
-    const minutes = getQueryParameters().m || 3;
-    let timeLeft = minutes*60*1000;
-    let endTime = undefined;
+    var timerOn = false;
+    var interval = null;
+    var minutes = getQueryParameters().m || 3;
+    var timeLeft = minutes*60*1000;
+    var endTime = undefined;
     function getTimeRemaining(t){
         var seconds = Math.floor( (t/1000) % 60 );
         var minutes = Math.floor( (t/1000/60) % 60 );
@@ -99,7 +99,7 @@
             document.body.classList = "red";
         }
 
-        let timeRemaining = getTimeRemaining(timeLeft);
+        var timeRemaining = getTimeRemaining(timeLeft);
         window.document.querySelector('#timer').innerHTML = timeRemaining.minutes + ":" + ('0' + timeRemaining.seconds).slice(-2) ;
         return true;
     }
